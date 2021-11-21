@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 import AppStackNavigator from "./src/navigator";
 
@@ -20,8 +21,10 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <AppStackNavigator />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <AppStackNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

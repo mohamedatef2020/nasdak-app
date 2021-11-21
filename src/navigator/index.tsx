@@ -17,22 +17,10 @@ export type RootStackParamList = {
 const AppStack = createNativeStackNavigator();
 const AppStackNavigator = () => {
   return (
-    <AppStack.Navigator>
-      <AppStack.Screen
-        name="Onboarding"
-        component={OnboardingScreen}
-        options={{ headerShown: false }}
-      />
-      <AppStack.Screen
-        name="Explore"
-        component={ExploreScreen}
-        options={{ title: "Explore Stocks" }}
-      />
-      <AppStack.Screen
-        name="StockDetails"
-        component={StockDetailsScreen}
-        options={{ title: "Stock Details" }}
-      />
+    <AppStack.Navigator screenOptions={{ headerShown: false }}>
+      <AppStack.Screen name="Onboarding" component={OnboardingScreen} />
+      <AppStack.Screen name="Explore" component={ExploreScreen} />
+      <AppStack.Screen name="StockDetails" component={StockDetailsScreen} />
     </AppStack.Navigator>
   );
 };
