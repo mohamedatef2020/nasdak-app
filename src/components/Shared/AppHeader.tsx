@@ -7,14 +7,18 @@ import {
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from "react-native";
-import { SearchBar } from "react-native-elements";
+import { useNavigation } from "@react-navigation/core";
+import { SearchBar, Header, Avatar } from "react-native-elements";
 import AppColors from "../../constants/Colors";
 
 interface AppHeaderProps {
   isSearch?: boolean;
+  logo?: string | undefined;
+  initials?: string;
 }
 
-const AppHeader = ({ isSearch }: AppHeaderProps) => {
+const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
+  const navigation = useNavigation();
   const [value, setValue] = useState("");
   const updateSearch: (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
@@ -23,25 +27,47 @@ const AppHeader = ({ isSearch }: AppHeaderProps) => {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <>
       {isSearch ? (
-        <View>
-          <SearchBar
-            platform="default"
-            lightTheme
-            containerStyle={styles.containerStyle}
-            inputContainerStyle={styles.inputContainerStyle}
-            placeholder="Search Stock"
-            onChange={updateSearch}
-            value={value}
-          />
-        </View>
+        <SafeAreaView style={styles.container} edges={["top"]}>
+          <View>
+            <SearchBar
+              platform="default"
+              lightTheme
+              containerStyle={styles.containerStyle}
+              inputContainerStyle={styles.inputContainerStyle}
+              placeholder="Search Stock"
+              onChange={updateSearch}
+              value={value}
+            />
+          </View>
+        </SafeAreaView>
       ) : (
-        <View>
-          <Text>without search</Text>
-        </View>
+        <Header
+          backgroundColor={AppColors.primary}
+          leftComponent={{
+            icon: "arrow-back",
+            color: "#fff",
+            iconStyle: { color: "#fff" },
+            onPress: () => navigation.goBack(),
+          }}
+          leftContainerStyle={{
+            justifyContent: "center",
+          }}
+          centerComponent={
+            <Avatar
+              source={{ uri: logo }}
+              size="medium"
+              rounded
+              title={initials}
+              titleStyle={{ color: AppColors.dark }}
+              placeholderStyle={{ backgroundColor: AppColors.primaryLighter }}
+              avatarStyle={{ resizeMode: "contain" }}
+            />
+          }
+        />
       )}
-    </SafeAreaView>
+    </>
   );
 };
 
@@ -52,7 +78,6 @@ const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: AppColors.primary,
     borderTopWidth: 0,
-    borderBottomWidth: 0,
   },
   inputContainerStyle: {
     backgroundColor: AppColors.primaryLighter,

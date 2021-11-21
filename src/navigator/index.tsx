@@ -10,7 +10,20 @@ import StockDetailsScreen from "../screens/StocksRelatedScreens/StockDetailsScre
 
 export type RootStackParamList = {
   Explore: undefined;
-  StockDetails: undefined;
+  StockDetails: {
+    stockLogo: string | undefined;
+    stockInitials: string;
+    stockTicker: string;
+    stockName: string;
+    close: number;
+    open: number;
+    high: number;
+    low: number;
+    volume: number;
+    companyUrl: string | null;
+    industry: string | null;
+    description: string | null;
+  };
   Onboarding: undefined;
 };
 
