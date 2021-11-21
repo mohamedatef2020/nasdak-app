@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, ActivityIndicator, FlatList } from "react-native";
+import { View, ActivityIndicator, FlatList, Alert } from "react-native";
 import { ListItem } from "react-native-elements";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import axiosInstance from "../../../utils/axiosInstance";
 import { RootStackParamList } from "../../../navigator";
+import { getInitials } from "../../../utils/helpers";
 import styles from "./styles";
 import AppColors from "../../../constants/Colors";
 
@@ -31,6 +32,43 @@ const ExploreScreen = ({
       setData(response.data.results);
       setNextUrl(response.data?.next_url);
     } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // THIS FUNCTION WILL BE MOVED TO ITS OWN MODULE LATER
+  const getTickerData = async (ticker: string) => {
+    try {
+      const response = await axiosInstance.get(
+        `/v1/meta/symbols/${ticker}/company`,
+      );
+      const responsePrev = await axiosInstance.get(
+        `https://api.polygon.io/v2/aggs/ticker/${ticker}/prev`,
+      );
+      const initials = getInitials(response?.data?.name);
+      navigation.navigate("StockDetails", {
+        stockLogo: response?.data?.logo,
+        stockInitials: initials,
+        stockTicker: ticker,
+        stockName: response?.data?.name,
+        close: responsePrev?.data?.results[0]?.c,
+        open: responsePrev?.data?.results[0]?.o,
+        high: responsePrev?.data?.results[0]?.h,
+        low: responsePrev?.data?.results[0]?.l,
+        volume: responsePrev?.data?.results[0]?.v,
+        companyUrl: response?.data?.url,
+        industry: response?.data?.industry,
+        description: response?.data?.description,
+      });
+      // setNextUrl(response.data?.next_url);
+    } catch (e: any) {
+      if (e?.response?.status === 404) {
+        Alert.alert(
+          "No Details",
+          `using: /v1/meta/symbols/${ticker}/company API there was no data for that ticker`,
+          [{ text: "OKAY" }],
+        );
+      }
       console.log(e);
     }
   };
@@ -76,6 +114,7 @@ const ExploreScreen = ({
             key={item?.ticker}
             containerStyle={styles.item}
             bottomDivider
+            onPress={() => getTickerData(item.ticker)}
           >
             <ListItem.Content>
               <ListItem.Title style={styles.itemTitle}>
