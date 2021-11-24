@@ -53,7 +53,7 @@ const ExploreScreen = ({
     <View style={styles.screen}>
       <AppHeader isSearch />
       <Overlay isVisible={isLoading}>
-        <ActivityIndicator />
+        <ActivityIndicator color={AppColors.primary} />
       </Overlay>
       <FlatList
         style={{ paddingBottom: insets.bottom }}

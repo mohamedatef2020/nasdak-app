@@ -73,7 +73,7 @@ const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
           }}
           centerComponent={
             <Avatar
-              source={{ uri: logo }}
+              source={logo?.length > 0 ? { uri: logo } : null}
               size="medium"
               rounded
               title={initials}
@@ -83,10 +83,9 @@ const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
                 resizeMode: "contain",
                 borderWidth: logo ? 0 : 1,
                 borderColor: AppColors.lighGray,
+                borderRadius: 1000,
               }}
-              titleStyle={{ color: AppColors.dark }}
-              placeholderStyle={{ backgroundColor: AppColors.primaryLighter }}
-              avatarStyle={{ resizeMode: "contain" }}
+              containerStyle={{ backgroundColor: AppColors.primaryLighter }}
             />
           }
         />

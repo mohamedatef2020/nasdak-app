@@ -23,7 +23,11 @@ instance.interceptors.response.use(
   },
   async function (error) {
     if (error.response.status === 429) {
-      Alert.alert("Sorry", error.response.data.error, [{ text: "OKAY" }]);
+      Alert.alert(
+        "Sorry",
+        "Sorry you reached the maximum API hits per minute by polygon",
+        [{ text: "OKAY" }],
+      );
     }
     return Promise.reject(error);
   },
