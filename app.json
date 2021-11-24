@@ -1,6 +1,9 @@
 {
   "expo": {
-    "name": "nasdak",
+    "owner": "thndr",
+    "name": "Nasdak App",
+    "privacy": "public",
+    "description": "An app requested by Thnr company as a test during the hiring process",
     "slug": "nasdak",
     "version": "1.0.0",
     "orientation": "portrait",
