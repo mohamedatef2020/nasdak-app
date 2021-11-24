@@ -10,12 +10,16 @@ import {
 import { Icon } from "react-native-elements";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigator";
+import { useActions } from "../../../overmind";
 import styles from "./styles";
 
 // components
 import Indicator from "../../../components/SpecialScreens/Onboarding/Indicator";
 import Backdrop from "../../../components/SpecialScreens/Onboarding/Backdrop";
 import Square from "../../../components/SpecialScreens/Onboarding/Square";
+
+// functions and helpers
+import { storeData } from "../../../utils/helpers";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -45,6 +49,7 @@ const DATA = [
 export default function OnboardingScreen({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, "Onboarding">) {
+  const { initializarions } = useActions();
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.container}>
@@ -105,7 +110,11 @@ export default function OnboardingScreen({
                     right: 20,
                     zIndex: 2000,
                   }}
-                  onPress={() => navigation.replace("Explore")}
+                  onPress={async () => {
+                    await storeData("@isIntroSeen", JSON.stringify(true));
+                    // navigation.replace("Explore");
+                    initializarions();
+                  }}
                 />
               )}
             </View>

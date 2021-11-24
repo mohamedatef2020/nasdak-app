@@ -3,45 +3,92 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import {
   StyleSheet,
   View,
-  Text,
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from "react-native";
-import { SearchBar } from "react-native-elements";
+import { useNavigation } from "@react-navigation/core";
+import { SearchBar, Header, Avatar } from "react-native-elements";
 import AppColors from "../../constants/Colors";
+
+import { useActions } from "../../overmind";
 
 interface AppHeaderProps {
   isSearch?: boolean;
+  logo?: string | undefined;
+  initials?: string;
 }
 
-const AppHeader = ({ isSearch }: AppHeaderProps) => {
+const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
+  const { searchTickerAction } = useActions().explore;
+  const navigation = useNavigation();
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const search = async (query: string) => {
+    setLoading(true);
+    setValue(query);
+    await searchTickerAction(query);
+    setLoading(false);
+  };
   const updateSearch: (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
-  ) => void = (e) => {
-    setValue(e.nativeEvent.text);
+  ) => void = async (e) => {
+    try {
+      await search(e.nativeEvent.text);
+    } catch (e) {
+      setLoading(false);
+    }
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <>
       {isSearch ? (
-        <View>
-          <SearchBar
-            platform="default"
-            lightTheme
-            containerStyle={styles.containerStyle}
-            inputContainerStyle={styles.inputContainerStyle}
-            placeholder="Search Stock"
-            onChange={updateSearch}
-            value={value}
-          />
-        </View>
+        <SafeAreaView style={styles.container} edges={["top"]}>
+          <View>
+            <SearchBar
+              platform="default"
+              lightTheme
+              showLoading={loading}
+              containerStyle={styles.containerStyle}
+              inputContainerStyle={styles.inputContainerStyle}
+              placeholder="Search Stock"
+              onChange={updateSearch}
+              onClear={async () => {
+                await search("");
+              }}
+              value={value}
+            />
+          </View>
+        </SafeAreaView>
       ) : (
-        <View>
-          <Text>without search</Text>
-        </View>
+        <Header
+          backgroundColor={AppColors.primary}
+          leftComponent={{
+            icon: "arrow-back",
+            color: "#fff",
+            iconStyle: { color: "#fff" },
+            onPress: () => navigation.goBack(),
+          }}
+          leftContainerStyle={{
+            justifyContent: "center",
+          }}
+          centerComponent={
+            <Avatar
+              source={{ uri: logo }}
+              size="medium"
+              rounded
+              title={initials}
+              titleStyle={{ color: AppColors.white }}
+              placeholderStyle={{ backgroundColor: AppColors.primaryLighter }}
+              avatarStyle={{
+                resizeMode: "contain",
+                borderWidth: logo ? 0 : 1,
+                borderColor: AppColors.lighGray,
+              }}
+            />
+          }
+        />
       )}
-    </SafeAreaView>
+    </>
   );
 };
 
