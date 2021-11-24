@@ -4,11 +4,11 @@ import { Text } from "react-native-elements";
 import AppColors from "../../../constants/Colors";
 
 type StockStatisticsProps = {
-  close: number;
-  open: number;
-  high: number;
-  low: number;
-  volume: number;
+  close: number | null;
+  open: number | null;
+  high: number | null;
+  low: number | null;
+  volume: number | null;
 };
 
 const StockStatistics = ({

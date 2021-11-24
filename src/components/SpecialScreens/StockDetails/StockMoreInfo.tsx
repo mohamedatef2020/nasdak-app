@@ -4,9 +4,9 @@ import { Text } from "react-native-elements";
 import AppColors from "../../../constants/Colors";
 
 type StockMoreInfoProps = {
-  companyUrl: string | null;
-  industry: string | null;
-  description: string | null;
+  companyUrl: string;
+  industry: string;
+  description: string;
 };
 
 const StockMoreInfo = ({
@@ -14,39 +14,34 @@ const StockMoreInfo = ({
   industry,
   description,
 }: StockMoreInfoProps) => {
-  return (
+  return companyUrl?.length > 0 ||
+    industry?.length > 0 ||
+    description?.length > 0 ? (
     <View style={styles.container}>
-      {(companyUrl || industry || description) && (
-        <>
-          {companyUrl && (
-            <View style={[styles.detailContainer, styles.detailContainerRow]}>
-              <Text style={[styles.detailHeader, styles.detailHeaderAbout]}>
-                About
-              </Text>
-              <Text
-                style={styles.link}
-                onPress={() => Linking.openURL(companyUrl)}
-              >
-                Visit Website
-              </Text>
-            </View>
-          )}
-          {industry && (
-            <View style={styles.detailContainer}>
-              <Text style={styles.detailHeader}>Industry</Text>
-              <Text style={styles.dataText}>{industry}</Text>
-            </View>
-          )}
-          {description && (
-            <View>
-              <Text style={styles.detailHeader}>Description</Text>
-              <Text style={styles.dataText}>{description}</Text>
-            </View>
-          )}
-        </>
+      {companyUrl?.length > 0 && (
+        <View style={[styles.detailContainer, styles.detailContainerRow]}>
+          <Text style={[styles.detailHeader, styles.detailHeaderAbout]}>
+            About
+          </Text>
+          <Text style={styles.link} onPress={() => Linking.openURL(companyUrl)}>
+            Visit Website
+          </Text>
+        </View>
+      )}
+      {industry?.length > 0 && (
+        <View style={styles.detailContainer}>
+          <Text style={styles.detailHeader}>Industry</Text>
+          <Text style={styles.dataText}>{industry}</Text>
+        </View>
+      )}
+      {description?.length > 0 && (
+        <View>
+          <Text style={styles.detailHeader}>Description</Text>
+          <Text style={styles.dataText}>{description}</Text>
+        </View>
       )}
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({

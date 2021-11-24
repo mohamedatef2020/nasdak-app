@@ -3,13 +3,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import {
   StyleSheet,
   View,
-  Text,
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { SearchBar, Header, Avatar } from "react-native-elements";
 import AppColors from "../../constants/Colors";
+
+import { useActions } from "../../overmind";
 
 interface AppHeaderProps {
   isSearch?: boolean;
@@ -18,12 +19,24 @@ interface AppHeaderProps {
 }
 
 const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
+  const { searchTickerAction } = useActions().explore;
   const navigation = useNavigation();
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const search = async (query: string) => {
+    setLoading(true);
+    setValue(query);
+    await searchTickerAction(query);
+    setLoading(false);
+  };
   const updateSearch: (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
-  ) => void = (e) => {
-    setValue(e.nativeEvent.text);
+  ) => void = async (e) => {
+    try {
+      await search(e.nativeEvent.text);
+    } catch (e) {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,10 +47,14 @@ const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
             <SearchBar
               platform="default"
               lightTheme
+              showLoading={loading}
               containerStyle={styles.containerStyle}
               inputContainerStyle={styles.inputContainerStyle}
               placeholder="Search Stock"
               onChange={updateSearch}
+              onClear={async () => {
+                await search("");
+              }}
               value={value}
             />
           </View>
@@ -60,6 +77,13 @@ const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
               size="medium"
               rounded
               title={initials}
+              titleStyle={{ color: AppColors.white }}
+              placeholderStyle={{ backgroundColor: AppColors.primaryLighter }}
+              avatarStyle={{
+                resizeMode: "contain",
+                borderWidth: logo ? 0 : 1,
+                borderColor: AppColors.lighGray,
+              }}
               titleStyle={{ color: AppColors.dark }}
               placeholderStyle={{ backgroundColor: AppColors.primaryLighter }}
               avatarStyle={{ resizeMode: "contain" }}
