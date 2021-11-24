@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 export const getInitials = function (string: string): string {
   var names = string?.split(" "),
     initials = names[0]?.substring(0, 1)?.toUpperCase();

@@ -84,6 +84,9 @@ const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
                 borderWidth: logo ? 0 : 1,
                 borderColor: AppColors.lighGray,
               }}
+              titleStyle={{ color: AppColors.dark }}
+              placeholderStyle={{ backgroundColor: AppColors.primaryLighter }}
+              avatarStyle={{ resizeMode: "contain" }}
             />
           }
         />
@@ -99,7 +102,6 @@ const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: AppColors.primary,
     borderTopWidth: 0,
-    borderBottomWidth: 0,
   },
   inputContainerStyle: {
     backgroundColor: AppColors.primaryLighter,
