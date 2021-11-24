@@ -29,7 +29,7 @@ const AppLoadingScreen = ({
             width: "100%",
           }}
           loop={false}
-          onAnimationFinish={() => navigation.navigate("Explore")}
+          onAnimationFinish={() => navigation.replace("Explore")}
         />
         <Text
           h4

@@ -1,4 +1,5 @@
 export type TickerPreviousDayStatistics = {
+  T: string | null;
   c: number | null;
   o: number | null;
   h: number | null;
@@ -34,6 +35,6 @@ export const state: State = {
     status: null,
   },
   previouslyVisitedTickerDetails: [],
-  tickerStatistics: { c: null, o: null, h: null, l: null, v: null },
+  tickerStatistics: { T: "", c: null, o: null, h: null, l: null, v: null }, // forced by overmind not to use optional properties for the state :(
   previouslyVisitedTickeStatistics: [],
 };

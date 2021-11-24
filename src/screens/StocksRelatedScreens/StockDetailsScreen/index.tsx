@@ -1,5 +1,6 @@
-import React, { useEffect, useCallback } from "react";
-import { View, ScrollView, Alert } from "react-native";
+import React, { useEffect, useCallback, useState } from "react";
+import { View, ScrollView, ActivityIndicator } from "react-native";
+import { Overlay } from "react-native-elements";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigator";
 import { useAppState, useActions } from "../../../overmind";
@@ -11,12 +12,14 @@ import AppHeader from "../../../components/Shared/AppHeader";
 import StockBasicInfo from "../../../components/SpecialScreens/StockDetails/StockBasicInfo";
 import StockStatistics from "../../../components/SpecialScreens/StockDetails/StcckStatistics";
 import StockMoreInfo from "../../../components/SpecialScreens/StockDetails/StockMoreInfo";
+import AppColors from "../../../constants/Colors";
 
 const StockDetailsScreen = ({
   navigation,
   route,
 }: NativeStackScreenProps<RootStackParamList, "StockDetails">) => {
   const { tickerDetails, tickerStatistics } = useAppState().tickerDetails;
+  const { isLoading } = useAppState();
   const { getTickerStatisticsAction } = useActions().tickerDetails;
 
   const getTickerDetails = useCallback(async () => {
@@ -33,6 +36,9 @@ const StockDetailsScreen = ({
         logo={tickerDetails?.logo}
         initials={getInitials(route?.params?.stockName)}
       />
+      <Overlay isVisible={isLoading}>
+        <ActivityIndicator color={AppColors.primary} />
+      </Overlay>
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <StockBasicInfo
           ticker={route?.params?.stockTicker}
