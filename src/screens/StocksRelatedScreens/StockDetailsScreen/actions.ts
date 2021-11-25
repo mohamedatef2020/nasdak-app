@@ -17,7 +17,6 @@ export const getTickerDetailsAction = async (
     if (state.tickerDetails.previouslyVisitedTickerDetails.length > 0) {
       const selected = state.tickerDetails.previouslyVisitedTickerDetails.find(
         (item) => {
-          // console.log(item.symbol, ticker);
           return item.symbol === ticker;
         },
       );

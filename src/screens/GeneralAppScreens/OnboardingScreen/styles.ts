@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    flex: 0.8,
+    justifyContent: "center",
+  },
   image: {
     resizeMode: "contain",
   },
@@ -17,6 +21,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  iconContainerStyle: {
+    alignSelf: "flex-end",
+    bottom: 0,
+    position: "absolute",
+    right: 20,
+    zIndex: 2000,
   },
 });
 

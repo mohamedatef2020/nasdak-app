@@ -10,9 +10,13 @@ import {
 import { state } from "./globals/globalState";
 import * as actions from "./globals/globalActions";
 import * as effects from "./globals/globalEffects";
+
+// the overmind config from other modules 
 import * as explore from "../screens/StocksRelatedScreens/ExploreScreen/overmindIndex";
 import * as tickerDetails from "../screens/StocksRelatedScreens/StockDetailsScreen/overmindIndex";
 
+
+// combine everything together
 export const config = merge(
   {
     state,

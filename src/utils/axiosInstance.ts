@@ -1,5 +1,5 @@
-import { Alert } from "react-native";
 import axios from "axios";
+import { showMessage } from "react-native-flash-message";
 
 const instance = axios.create({
   baseURL: "https://api.polygon.io/",
@@ -23,11 +23,10 @@ instance.interceptors.response.use(
   },
   async function (error) {
     if (error.response.status === 429) {
-      Alert.alert(
-        "Sorry",
-        "Sorry you reached the maximum API hits per minute by polygon",
-        [{ text: "OKAY" }],
-      );
+      showMessage({
+        message: "Sorry you reached the maximum API hits per minute by polygon",
+        type: "danger",
+      });
     }
     return Promise.reject(error);
   },

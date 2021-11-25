@@ -14,7 +14,6 @@ export const storeData = async (key: string, value: any) => {
   try {
     await AsyncStorage.setItem(key, value);
   } catch (e) {
-    console.log(e);
   }
 };
 
@@ -27,7 +26,6 @@ export const getData = async (key: string) => {
       return JSON.parse(value);
     }
   } catch (e) {
-    console.log(e);
   }
 };
 
@@ -36,8 +34,5 @@ export const removeData = async (key: string) => {
     await AsyncStorage.removeItem(key);
   } catch (e) {
     // remove error
-    console.log(e);
   }
-
-  console.log("Done.");
 };

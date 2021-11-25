@@ -14,7 +14,7 @@ import { useActions } from "../../overmind";
 
 interface AppHeaderProps {
   isSearch?: boolean;
-  logo?: string | undefined;
+  logo: string;
   initials?: string;
 }
 
@@ -73,7 +73,7 @@ const AppHeader = ({ isSearch, logo, initials }: AppHeaderProps) => {
           }}
           centerComponent={
             <Avatar
-              source={logo?.length > 0 ? { uri: logo } : null}
+              source={logo?.length > 0 ? { uri: logo } : undefined}
               size="medium"
               rounded
               title={initials}
