@@ -1,8 +1,8 @@
 # Links
-* [Installation Guide](#license)
+* [Installation Guide](#installation-guide)
 * [About the app](#about-the-app)
 * [About the structure](#about-the-structure)
-* [Useful links](#usiful-links)
+* [Useful links](#useful-links)
 * [Enjoy](#enjoy)
 
 # Installation Guide
