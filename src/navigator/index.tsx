@@ -24,7 +24,6 @@ export type RootStackParamList = {
 
 const AppStack = createNativeStackNavigator();
 const AppStackNavigator = () => {
-  // const { state } = overmind;
   const { isIntroSeen } = useAppState();
   return (
     <AppStack.Navigator screenOptions={{ headerShown: false }}>

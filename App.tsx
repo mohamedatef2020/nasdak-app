@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 import { useActions } from "./src/overmind/index";
 import AppStackNavigator from "./src/navigator";
+import FlashMessage from "react-native-flash-message";
 
 export default function App() {
   const { initializarions } = useActions();
@@ -27,6 +28,7 @@ export default function App() {
       <NavigationContainer>
         <AppStackNavigator />
       </NavigationContainer>
+      <FlashMessage position="top" duration={4000} floating />
     </SafeAreaProvider>
   );
 }

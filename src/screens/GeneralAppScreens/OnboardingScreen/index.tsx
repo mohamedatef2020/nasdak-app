@@ -78,12 +78,7 @@ export default function OnboardingScreen({
                 zIndex: 10,
               }}
             >
-              <View
-                style={{
-                  flex: 0.8,
-                  justifyContent: "center",
-                }}
-              >
+              <View style={styles.imageContainer}>
                 <Image
                   source={item.image}
                   style={[
@@ -103,16 +98,9 @@ export default function OnboardingScreen({
                   type="font-awesome"
                   color="#FF63ED"
                   tvParallaxProperties
-                  containerStyle={{
-                    alignSelf: "flex-end",
-                    bottom: 0,
-                    position: "absolute",
-                    right: 20,
-                    zIndex: 2000,
-                  }}
+                  containerStyle={styles.iconContainerStyle}
                   onPress={async () => {
                     await storeData("@isIntroSeen", JSON.stringify(true));
-                    // navigation.replace("Explore");
                     initializarions();
                   }}
                 />

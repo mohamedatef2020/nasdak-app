@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import { View, ScrollView, ActivityIndicator } from "react-native";
 import { Overlay } from "react-native-elements";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -10,7 +10,7 @@ import styles from "./styles";
 // components
 import AppHeader from "../../../components/Shared/AppHeader";
 import StockBasicInfo from "../../../components/SpecialScreens/StockDetails/StockBasicInfo";
-import StockStatistics from "../../../components/SpecialScreens/StockDetails/StcckStatistics";
+import StockStatistics from "../../../components/SpecialScreens/StockDetails/StockStatistics";
 import StockMoreInfo from "../../../components/SpecialScreens/StockDetails/StockMoreInfo";
 import AppColors from "../../../constants/Colors";
 
