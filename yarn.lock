@@ -3727,6 +3727,11 @@ lottie-react-native@4.0.3:
     prop-types "^15.5.10"
     react-native-safe-modules "^1.0.3"
 
+lottie-web@^5.7.1:
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.8.1.tgz#807e0af0ad22b59bf867d964eb684cb3368da0ef"
+  integrity sha512-9gIizWADlaHC2GCt+D+yNpk5l2clZQFqnVWWIVdY0LnxC/uLa39dYltAe3fcmC/hrZ2IUQ8dLlY0O934Npjs7Q==
+
 lru-cache@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-6.0.0.tgz#6d6fe6570ebd96aaf90fcad1dafa3b2566db3a94"
@@ -4823,6 +4828,13 @@ react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"
   integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
+
+react-native-web-lottie@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-web-lottie/-/react-native-web-lottie-1.4.4.tgz#b64d989cf3300bff5813f4ee3f2ee466092e6e4c"
+  integrity sha512-W0jZiOf2u3Us6yASdpgAuL1+3Gw1EU/Wi5QAf6brzhXmJnq6/FMGCTf5zvSaX0yIurr9qcYB40DwAb4HwA6frg==
+  dependencies:
+    lottie-web "^5.7.1"
 
 react-native-web@0.17.1:
   version "0.17.1"
