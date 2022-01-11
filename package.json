@@ -7,13 +7,17 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "cypress:open": "cypress open",
+    "cypress:percy": "percy exec -- cypress run --env PERCY_TOKEN=69b93e273d700c683579efd750e6062b3fc975d457d3cda6cf794b279b0dc4ee",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "axios": "^0.24.0",
+    "cypress": "^9.2.1",
     "expo": "~43.0.2",
     "expo-splash-screen": "~0.13.5",
     "expo-status-bar": "~1.1.0",
@@ -33,8 +37,11 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@expo/webpack-config": "^0.16.15",
+    "@percy/cli": "^1.0.0-beta.71",
+    "@percy/cypress": "^3.1.1",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
+    "cypress-xpath": "^1.6.2",
     "typescript": "~4.3.5"
   },
   "private": true
